@@ -4,9 +4,9 @@ from typing import List
 from app.db import SessionLocal, engine
 from app.crud.body_part import create_body_part, update_body_part, get_body_part, get_body_parts, delete_body_part
 from app.schemas.body_part import BodyPart, BodyPartCreate, BodyPartUpdate
-from app.models.body_part import BodyPart as BodyPartModel
+from app.models import body_part as body_part_models
 
-BodyPartModel.Base.metadata.create_all(bind=engine)
+body_part_models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 

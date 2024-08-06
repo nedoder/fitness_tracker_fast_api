@@ -3,7 +3,7 @@ from app.models.body_part import BodyPart
 from app.schemas.body_part import BodyPartCreate, BodyPartUpdate
 
 def create_body_part(db: Session, user: BodyPartCreate):
-    db_body_part = BodyPart(username=user.username, email=user.email, hashed_password=hashed_password)
+    db_body_part = BodyPart()
 
     db.add(db_body_part)
     db.commit()

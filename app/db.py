@@ -11,6 +11,8 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
+from app.models import user, body_part, exercise, training, level
+
 def get_db():
     db = SessionLocal()
     try:

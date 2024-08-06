@@ -8,6 +8,7 @@ class GenderEnum(Enum):
     MALE = 0
     FEMALE = 1
     OTHER = 2
+    
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)

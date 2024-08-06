@@ -18,7 +18,7 @@ class Exercise(Base):
 class ExerciseInstance(Base):
     __tablename__ = 'exercise_instances'
     id = Column(Integer, primary_key=True, index=True)
-    training_session_id = Column(Integer, ForeignKey('training_sessions.id'))
+    training_session_id = Column(Integer, ForeignKey('trainings.id'))
     exercise_id = Column(Integer, ForeignKey('exercises.id'))
     reps = Column(Integer)
     sets = Column(Integer)

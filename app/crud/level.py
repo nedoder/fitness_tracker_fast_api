@@ -3,7 +3,7 @@ from app.models.level import Level
 from app.schemas.level import LevelCreate, LevelUpdate
 
 def create_level(db: Session, user: LevelCreate):
-    db_level = Level(username=user.username, email=user.email, hashed_password=hashed_password)
+    db_level = Level()
 
     db.add(db_level)
     db.commit()

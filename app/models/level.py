@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, Enum
+from sqlalchemy import Column, Integer, Enum as SqlEnum
 from sqlalchemy.ext.declarative import declarative_base
+from enum import Enum
 from sqlalchemy.orm import relationship
 from app.db import Base
 
@@ -11,6 +12,6 @@ class LevelEnum(Enum):
 class Level(Base):
     __tablename__ = 'levels'
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(Enum(LevelEnum), unique=True, index=True)
+    name = Column(SqlEnum(LevelEnum), unique=True, index=True)
 
     exercises = relationship("Exercise", back_populates="level")

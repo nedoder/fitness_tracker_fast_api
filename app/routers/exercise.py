@@ -4,12 +4,9 @@ from typing import List
 from app.db import SessionLocal, engine
 from app.crud.exercise import create_exercise, update_exercise, get_exercise, get_exercises, delete_exercise, create_exercise_instance, update_exercise_instance, get_exercise_instance, get_exercise_instances, delete_exercise_instance
 from app.schemas.exercise import Exercise, ExerciseCreate, ExerciseUpdate, ExerciseInstance, ExerciseInstanceCreate, ExerciseInstanceUpdate
-from app.models.exercise import Exercise as ExerciseModel
-from app.models.exercise import ExerciseInstance as ExerciseInstanceModel
+from app.models import exercise as exercise_models
 
-ExerciseModel.Base.metadata.create_all(bind=engine)
-ExerciseInstanceModel.Base.metadata.create_all(bind=engine)
-
+exercise_models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 

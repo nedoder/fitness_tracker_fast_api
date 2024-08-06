@@ -4,9 +4,9 @@ from typing import List
 from app.db import SessionLocal, engine
 from app.crud.training import create_training, update_training, get_training, get_trainings, delete_training
 from app.schemas. training import Training, TrainingCreate, TrainingUpdate
-from app.models.training import Training as TrainingModel
+from app.models import training as training_models
 
-TrainingModel.Base.metadata.create_all(bind=engine)
+training_models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 

@@ -4,9 +4,9 @@ from typing import List
 from app.db import SessionLocal, engine
 from app.crud.level import create_level, update_level, get_level, get_levels, delete_level
 from app.schemas.level import Level, LevelCreate, LevelUpdate
-from app.models.level import Level as LevelModel
+from app.models import level as level_models
 
-LevelModel.Base.metadata.create_all(bind=engine)
+level_models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 

@@ -4,9 +4,9 @@ from typing import List
 from app.db import SessionLocal, engine
 from app.crud.user import create_user, update_user, get_user, get_users, delete_user
 from app.schemas.user import User, UserCreate, UserUpdate
-from app.models.user import User as UserModel
+from app.models import user as user_models
 
-UserModel.Base.metadata.create_all(bind=engine)
+user_models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
 

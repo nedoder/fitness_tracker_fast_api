@@ -3,7 +3,7 @@ from app.models.training import Training
 from app.schemas.training import TrainingCreate, TrainingUpdate
 
 def create_training(db: Session, user: TrainingCreate):
-    db_training = Training(username=user.username, email=user.email, hashed_password=hashed_password)
+    db_training = Training()
 
     db.add(db_training)
     db.commit()
