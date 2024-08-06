@@ -1,5 +1,4 @@
 from sqlalchemy import Column, Integer, Enum as SqlEnum
-from sqlalchemy.ext.declarative import declarative_base
 from enum import Enum
 from sqlalchemy.orm import relationship
 from app.db import Base
