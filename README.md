@@ -19,6 +19,10 @@ Create  `.env` file and copy variables from `.env.example`.
 
 ![Er diagram](er.png)
 
+### Postman documentation
+
+[View API Documentation]([https://your-postman-doc-url](https://documenter.getpostman.com/view/31603076/2sA3rzKsYk))
+
 ### Clone the Repository
 
 ```
