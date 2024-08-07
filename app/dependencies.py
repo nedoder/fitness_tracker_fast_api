@@ -39,4 +39,4 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         "gender": user.gender.name
     }
     
-    return response_data
+    return response_data, db
