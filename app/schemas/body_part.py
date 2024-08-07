@@ -1,5 +1,7 @@
 from pydantic import BaseModel
+from typing import Optional
 from enum import Enum
+
 class BodyPartEnum(str, Enum):
     UPPER_BODY = "UPPER_BODY"
     LOWER_BODY = "LOWER_BODY"
@@ -9,6 +11,8 @@ class BodyPartEnum(str, Enum):
     LEGS = "LEGS"
     BACK = "BACK"
     SHOULDERS = "SHOULDERS"
+
+
 class BodyPartBase(BaseModel):
     name: BodyPartEnum
 

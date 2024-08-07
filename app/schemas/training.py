@@ -7,8 +7,8 @@ class TrainingBase(BaseModel):
     user_id: int
     name: str
     description: Optional[str]
-    start_time: Optional[datetime]
-    end_time: Optional[datetime]
+    start_time: Optional[datetime] = None
+    end_time: Optional[datetime] = None
     duration: Optional[float]
     calories_burned: Optional[float]
 

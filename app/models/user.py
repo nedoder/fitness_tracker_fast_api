@@ -26,4 +26,4 @@ class User(Base):
     date_joined = Column(DateTime, default=datetime.utcnow)
     last_login = Column(DateTime, default=datetime.utcnow)
 
-    training = relationship("Training", back_populates="user")
+    trainings = relationship("Training", back_populates="user")

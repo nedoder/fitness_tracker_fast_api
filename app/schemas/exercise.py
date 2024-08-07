@@ -36,7 +36,6 @@ class ExerciseInstanceUpdate(ExerciseInstanceBase):
 
 class ExerciseInstance(ExerciseInstanceBase):
     id: int
-    exercise: Exercise
 
     class Config:
         orm_mode = True

@@ -8,6 +8,7 @@ class LevelEnum(Enum):
     INTERMEDIATE = 1
     ADVANCED = 2
     EXPERT = 3
+    
 class Level(Base):
     __tablename__ = 'levels'
     id = Column(Integer, primary_key=True, index=True)

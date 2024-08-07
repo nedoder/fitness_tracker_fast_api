@@ -101,14 +101,14 @@ def upgrade() -> None:
 
     op.create_table('exercise_instances',
     sa.Column('id', sa.INTEGER(), autoincrement=True, nullable=False),
-    sa.Column('training_session_id', sa.INTEGER(), autoincrement=False, nullable=True),
+    sa.Column('training_id', sa.INTEGER(), autoincrement=False, nullable=True),
     sa.Column('exercise_id', sa.INTEGER(), autoincrement=False, nullable=True),
     sa.Column('reps', sa.INTEGER(), autoincrement=False, nullable=True),
     sa.Column('sets', sa.INTEGER(), autoincrement=False, nullable=True),
     sa.Column('weight', sa.DOUBLE_PRECISION(precision=53), autoincrement=False, nullable=True),
     sa.Column('duration', sa.DOUBLE_PRECISION(precision=53), autoincrement=False, nullable=True),
     sa.ForeignKeyConstraint(['exercise_id'], ['exercises.id'], name='exercise_instances_exercise_id_fkey'),
-    sa.ForeignKeyConstraint(['training_session_id'], ['trainings.id'], name='exercise_instances_training_session_id_fkey'),
+    sa.ForeignKeyConstraint(['training_id'], ['trainings.id'], name='exercise_instances_training_id_fkey'),
     sa.PrimaryKeyConstraint('id', name='exercise_instances_pkey')
     )
     op.create_index('ix_exercise_instances_id', 'exercise_instances', ['id'], unique=False)
