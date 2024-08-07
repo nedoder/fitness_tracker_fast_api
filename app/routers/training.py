@@ -1,21 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from app.db import SessionLocal, engine
+from app.db import engine
 from app.crud import training as training_crud
 from app.schemas import training as training_schemas
 from app.models import training as training_models
+from app.dependencies import get_db
 
 training_models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.post("/trainings/", response_model=training_schemas.Training)
 def create_training(training: training_schemas.TrainingCreate, db: Session = Depends(get_db)):

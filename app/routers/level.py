@@ -1,21 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from app.db import SessionLocal, engine
+from app.db import engine
 from app.crud import level as level_crud
 from app.schemas import level as level_schemas
 from app.models import level as level_models
+from app.dependencies import get_db
 
 level_models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.post("/levels/", response_model=level_schemas.Level)
 def create_level(level: level_schemas.LevelCreate, db: Session = Depends(get_db)):

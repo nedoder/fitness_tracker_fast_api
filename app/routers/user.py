@@ -1,21 +1,16 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from app.db import SessionLocal, engine
+from app.db import engine
 from app.crud import user as user_crud
 from app.schemas import user as user_schemas
 from app.models import user as user_models
+from app.utils.authentication import create_access_token
+from app.dependencies import get_db, get_current_user
 
 user_models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.post("/users/", response_model=user_schemas.User)
 def create_user(user: user_schemas.UserCreate, db: Session = Depends(get_db)):
@@ -25,6 +20,10 @@ def create_user(user: user_schemas.UserCreate, db: Session = Depends(get_db)):
 def read_users(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     users = user_crud.get_users(db, skip=skip, limit=limit)
     return users
+
+@router.get("/users/me", response_model=user_schemas.User)
+def read_users_me(current_user: user_schemas.User = Depends(get_current_user)):
+    return current_user
 
 @router.get("/users/{user_id}", response_model=user_schemas.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
@@ -47,3 +46,16 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="User not found")
     user_crud.delete_user(db=db, user_id=user_id)
     return db_user
+
+@router.post("/login", response_model=user_schemas.Token)
+def login(login_request: user_schemas.LoginRequest, db: Session = Depends(get_db)):
+    user = user_crud.authenticate_user(db, login_request.username, login_request.password)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    access_token = create_access_token(data={"sub": user.username})
+    return {"access_token": access_token, "token_type": "bearer"}
+

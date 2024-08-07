@@ -7,3 +7,6 @@ psycopg2
 pydantic-settings 
 python-dotenv
 uvicorn
+python-jose
+passlib
+python-multipart

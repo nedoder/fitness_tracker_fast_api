@@ -1,21 +1,15 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from app.db import SessionLocal, engine
+from app.db import engine
 from app.crud import body_part as body_part_crud
 from app.schemas import body_part as body_part_schemas
 from app.models import body_part as body_part_models
+from app.dependencies import get_db
 
 body_part_models.Base.metadata.create_all(bind=engine)
 
 router = APIRouter()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.post("/body_parts/", response_model=body_part_schemas.BodyPart)
 def create_body_part(body_part: body_part_schemas.BodyPartCreate, db: Session = Depends(get_db)):

@@ -3,13 +3,14 @@ from app.models import user as user_models
 from app.schemas import user as user_schemas
 from app.utils import hash_password
 
+
 def create_user(db: Session, user: user_schemas.UserCreate):
     hashed_password = hash_password.hash(user.password)
     user.password = hashed_password
     gender_enum = user_schemas.GenderEnum[user.gender]
     db_user = user_models.User(
-        username=user.username, 
-        email=user.email, 
+        username=user.username,
+        email=user.email,
         hashed_password=hashed_password,
         gender=gender_enum
     )
@@ -89,3 +90,14 @@ def delete_user(db: Session, user_id: int):
     }
     
     return response_data
+
+def verify_password(plain_password, hashed_password):
+    return hash_password.verify(plain_password, hashed_password)
+
+def authenticate_user(db: Session, username: str, password: str):
+    user = db.query(user_models.User).filter(user_models.User.username == username).first()
+    if not user:
+        return False
+    if not verify_password(password, user.hashed_password):
+        return False
+    return user
