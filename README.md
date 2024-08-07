@@ -21,7 +21,7 @@ Create  `.env` file and copy variables from `.env.example`.
 
 ### Postman documentation
 
-[View API Documentation]([https://your-postman-doc-url](https://documenter.getpostman.com/view/31603076/2sA3rzKsYk))
+[View API Documentation](https://documenter.getpostman.com/view/31603076/2sA3rzKsYk)
 
 ### Clone the Repository
 
