@@ -14,6 +14,11 @@ This is a simple CRUD Fitness tracker application built with FastAPI, PostgreSQL
 
 Create  `.env` file and copy variables from `.env.example`.
 
+
+### ER Diagram
+
+![Er diagram](er.png)
+
 ### Clone the Repository
 
 ```
